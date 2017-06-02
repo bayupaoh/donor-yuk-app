@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Donor Yuk!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="splash_donor_yuk">Donor Yuk!</string>
+    <string name="splash_setetes_darah_sejuta_arti">Setetes Darah Sejuta Arti</string>
+</resources>

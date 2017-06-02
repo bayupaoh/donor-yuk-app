@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_splash"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/icons"
+    tools:context="me.bayupaoh.donoryuk.view.splashscreen.SplashActivity">
+
+    <ImageView
+        android:id="@+id/splash_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_blood_donation"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/splash_tittle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/splash_icon"
+        android:text="@string/splash_donor_yuk"
+        android:textStyle="bold"
+        android:textColor="@color/primary_dark"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:textSize="@dimen/activity_splash_tittle"/>
+
+    <TextView
+        android:id="@+id/splash_subtittle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/splash_tittle"
+        android:text="@string/splash_setetes_darah_sejuta_arti"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:textSize="@dimen/activity_horizontal_margin"/>
+</RelativeLayout>
