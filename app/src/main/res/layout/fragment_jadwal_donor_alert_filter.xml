@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:padding="10dp"
+    android:background="@color/icons"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Provinsi"
+        android:textColor="@color/primary_text"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/filter_spn_prov"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tanggal Acara"
+        android:textColor="@color/primary_text"
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="Tanggal Acara"
+        android:textColor="@color/primary_text"
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:gravity="center"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filter Jadwal"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/icons"
+        android:textStyle="bold"
+        android:background="@color/primary_dark"/>
+</LinearLayout>

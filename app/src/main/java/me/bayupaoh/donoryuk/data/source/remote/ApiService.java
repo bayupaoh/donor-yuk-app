@@ -28,7 +28,7 @@ public interface ApiService {
     Observable<ModelListContent> getListContent();
 
     @GET("exec")
-    Observable<ModelStokDarah> getStokDarah(@Query("service") String service, @Query("gol") String gol, @Query("provinsi") String provinsi);
+    Observable<ModelStokDarah> getStokDarah(@Query("service") String service, @Query("gol") String gol, @Query("produk") String produk, @Query("provinsi") String provinsi);
 
     class factory {
         public static ApiService create() {

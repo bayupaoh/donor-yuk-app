@@ -43,8 +43,7 @@ public class JadwalDonorFragment extends Fragment implements JadwalDonorContract
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_jadwal_donor, container, false);
-        ;
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_jadwal_donor, container, false);;
         ButterKnife.bind(this, view);
         initPresenter();
         onAttachView();
@@ -88,7 +87,7 @@ public class JadwalDonorFragment extends Fragment implements JadwalDonorContract
 
     @Override
     public void showErrorMessage(String message) {
-        ViewUtils.showToast(getContext(), message);
+        ViewUtils.showToast(getView(), message);
     }
 
     @Override

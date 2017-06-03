@@ -1,6 +1,8 @@
 package me.bayupaoh.donoryuk.util;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 import android.widget.Toast;
 
 /**
@@ -8,8 +10,8 @@ import android.widget.Toast;
  */
 
 public class ViewUtils {
-    public static void showToast(Context context, String message) {
-        if (context != null && message != null)
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    public static void showToast(View view, String message) {
+        if (view != null && message != null)
+            Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
     }
 }
