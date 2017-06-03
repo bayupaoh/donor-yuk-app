@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager() {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFrag(new StockDarahFragment(),"Stok Darah");
-        viewPagerAdapter.addFrag(new JadwalDonorFragment(),"Daftar Acara");
+        viewPagerAdapter.addFrag(new JadwalDonorFragment(),"Jadwal Donor");
         viewPager.setAdapter(viewPagerAdapter);
     }
     private void setupTabIcons() {

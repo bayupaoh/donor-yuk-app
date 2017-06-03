@@ -1,6 +1,7 @@
 package me.bayupaoh.donoryuk.view.main.stockdarah;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -26,7 +27,7 @@ import me.bayupaoh.donoryuk.view.main.jadwaldonor.JadwalDonorPresenter;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StockDarahFragment extends Fragment implements StockDarahContract.View,SwipeRefreshLayout.OnRefreshListener{
+public class StockDarahFragment extends Fragment implements StockDarahContract.View,SwipeRefreshLayout.OnRefreshListener,StockDarahAdapter.StokDarahListener{
     private StockDarahAdapter adapter;
     private StockDarahPresenter presenter;
 
@@ -72,7 +73,7 @@ public class StockDarahFragment extends Fragment implements StockDarahContract.V
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        adapter = new StockDarahAdapter(getContext(), new ArrayList<ModelStokDarah.DataBean>());
+        adapter = new StockDarahAdapter(getContext(), new ArrayList<ModelStokDarah.DataBean>(),this);
         recJadwal.setAdapter(adapter);
     }
 
@@ -129,5 +130,13 @@ public class StockDarahFragment extends Fragment implements StockDarahContract.V
     public void onDestroy() {
         onDetachView();
         super.onDestroy();
+    }
+
+    @Override
+    public void share(String message) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, message);
+        startActivity(Intent.createChooser(shareIntent, "Bagikan ke sosial media"));
     }
 }

@@ -5,12 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.bayupaoh.donoryuk.R;
 import me.bayupaoh.donoryuk.data.ModelJadwalDonor;
 
@@ -22,10 +24,12 @@ public class JadwalDonorAdapter extends RecyclerView.Adapter<JadwalDonorAdapter.
 
     private Context context;
     private List<ModelJadwalDonor.DataBean> list;
+    private JadwalDonorAdapter.JadwalDonorListener jadwalDonorListener;
 
-    public JadwalDonorAdapter(Context context, List<ModelJadwalDonor.DataBean> list) {
+    public JadwalDonorAdapter(Context context, List<ModelJadwalDonor.DataBean> list, JadwalDonorListener jadwalDonorListener) {
         this.context = context;
         this.list = list;
+        this.jadwalDonorListener = jadwalDonorListener;
     }
 
     @Override
@@ -61,10 +65,21 @@ public class JadwalDonorAdapter extends RecyclerView.Adapter<JadwalDonorAdapter.
         TextView txtPeople;
         @BindView(R.id.row_jadwal_waktu)
         TextView txtWaktu;
+        @BindView(R.id.row_jadwal_share)
+        Button btnShare;
 
         public JadwalDonorViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
+        @OnClick(R.id.row_jadwal_share)
+        public void shareSocialMedia(){
+            jadwalDonorListener.share("Yuk datang ke "+list.get(getAdapterPosition()).getInstansi()+" di alamat "+list.get(getAdapterPosition()).getAlamat()+" untuk donor darah");
+        }
+    }
+
+    public interface JadwalDonorListener {
+        void share(String message);
     }
 }

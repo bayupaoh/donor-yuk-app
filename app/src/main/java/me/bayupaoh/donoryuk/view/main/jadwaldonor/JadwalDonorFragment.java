@@ -1,6 +1,7 @@
 package me.bayupaoh.donoryuk.view.main.jadwaldonor;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -23,7 +24,7 @@ import me.bayupaoh.donoryuk.util.ViewUtils;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class JadwalDonorFragment extends Fragment implements JadwalDonorContract.View,SwipeRefreshLayout.OnRefreshListener {
+public class JadwalDonorFragment extends Fragment implements JadwalDonorContract.View,SwipeRefreshLayout.OnRefreshListener,JadwalDonorAdapter.JadwalDonorListener {
 
 
     private JadwalDonorAdapter adapter;
@@ -61,7 +62,7 @@ public class JadwalDonorFragment extends Fragment implements JadwalDonorContract
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        adapter = new JadwalDonorAdapter(getContext(), new ArrayList<ModelJadwalDonor.DataBean>());
+        adapter = new JadwalDonorAdapter(getContext(), new ArrayList<ModelJadwalDonor.DataBean>(),this);
         recJadwal.setAdapter(adapter);
     }
 
@@ -128,5 +129,14 @@ public class JadwalDonorFragment extends Fragment implements JadwalDonorContract
     private void setupSwipeRefresh() {
         srJadwal.setColorSchemeColors(ContextCompat.getColor(getContext(), R.color.primary_dark));
         srJadwal.setOnRefreshListener(this);
+    }
+
+    @Override
+    public void share(String message) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, message);
+        startActivity(Intent.createChooser(shareIntent, "Bagikan ke sosial media"));
+
     }
 }
