@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private Unbinder unbinder;
 
     private int[] tabIcons = {
-            R.drawable.ic_list_stock,
-            R.drawable.ic_event
+            R.drawable.ic_blood,
+            R.drawable.ic_place_event
     };
 
 
