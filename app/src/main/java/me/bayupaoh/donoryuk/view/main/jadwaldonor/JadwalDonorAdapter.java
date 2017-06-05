@@ -26,6 +26,7 @@ public class JadwalDonorAdapter extends RecyclerView.Adapter<JadwalDonorAdapter.
     private Context context;
     private List<ModelJadwalDonor.DataBean> list;
     private JadwalDonorAdapter.JadwalDonorListener jadwalDonorListener;
+    private String date;
 
     public JadwalDonorAdapter(Context context, List<ModelJadwalDonor.DataBean> list, JadwalDonorListener jadwalDonorListener) {
         this.context = context;

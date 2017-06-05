@@ -13,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -21,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.bayupaoh.donoryuk.R;
 import me.bayupaoh.donoryuk.data.ModelJadwalDonor;
+import me.bayupaoh.donoryuk.util.StringUtils;
 import me.bayupaoh.donoryuk.util.ViewUtils;
 
 /**
@@ -31,6 +34,7 @@ public class JadwalDonorFragment extends Fragment implements JadwalDonorContract
 
     private JadwalDonorAdapter adapter;
     private JadwalDonorPresenter presenter;
+    private String date;
 
     @BindView(R.id.jadwal_recycler)
     RecyclerView recJadwal;
@@ -50,10 +54,18 @@ public class JadwalDonorFragment extends Fragment implements JadwalDonorContract
         ButterKnife.bind(this, view);
         initPresenter();
         onAttachView();
+        settingDate();
         setupRecyclerView();
         loadData();
         setupSwipeRefresh();
         return view;
+    }
+
+    private void settingDate() {
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        date= dateFormat.format(calendar.getTime());
     }
 
     private void setupRecyclerView() {
@@ -120,7 +132,7 @@ public class JadwalDonorFragment extends Fragment implements JadwalDonorContract
     }
 
     private void loadData() {
-        presenter.loadDataEvent("05/16/2017", "Jawa Barat");
+        presenter.loadDataEvent(date, "Jawa Barat");
     }
 
     @Override
