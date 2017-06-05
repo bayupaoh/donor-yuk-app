@@ -87,14 +87,25 @@
             android:textColor="@color/primary_text"
             android:textSize="15sp" />
 
-        <Button
+
+        <ImageView
             android:id="@+id/row_jadwal_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_alignParentRight="true"
             android:layout_below="@id/row_img_time"
-            android:background="@color/primary_dark"
-            android:text="Share"
+            android:src="@drawable/ic_share"
+            android:textColor="@color/icons"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/row_jadwal_bookmark"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_toLeftOf="@id/row_jadwal_share"
+            android:layout_below="@id/row_img_time"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_event"
             android:textColor="@color/icons"
             android:textStyle="bold" />
 

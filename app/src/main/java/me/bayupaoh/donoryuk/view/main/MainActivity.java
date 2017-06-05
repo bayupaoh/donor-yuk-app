@@ -1,5 +1,9 @@
 package me.bayupaoh.donoryuk.view.main;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.main_viewpager)
     ViewPager viewPager;
+    @BindView(R.id.main_collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbarLayout;
+    int mutedColor = R.attr.colorPrimary;
+
     private Unbinder unbinder;
 
     private int[] tabIcons = {
@@ -58,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
     private void setupToolbar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Donor Yuk!");
-        getSupportActionBar().setIcon(R.drawable.ic_action_name);
+        getSupportActionBar().setSubtitle("Jawa Barat");
+
+        collapsingToolbarLayout.setTitleEnabled(false);
     }
 }

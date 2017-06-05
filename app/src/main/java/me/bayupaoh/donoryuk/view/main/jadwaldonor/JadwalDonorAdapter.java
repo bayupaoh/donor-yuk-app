@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -66,7 +67,9 @@ public class JadwalDonorAdapter extends RecyclerView.Adapter<JadwalDonorAdapter.
         @BindView(R.id.row_jadwal_waktu)
         TextView txtWaktu;
         @BindView(R.id.row_jadwal_share)
-        Button btnShare;
+        ImageView btnShare;
+        @BindView(R.id.row_jadwal_bookmark)
+        ImageView btnBookmark;
 
         public JadwalDonorViewHolder(View itemView) {
             super(itemView);
@@ -77,9 +80,15 @@ public class JadwalDonorAdapter extends RecyclerView.Adapter<JadwalDonorAdapter.
         public void shareSocialMedia(){
             jadwalDonorListener.share("Yuk datang ke "+list.get(getAdapterPosition()).getInstansi()+" di alamat "+list.get(getAdapterPosition()).getAlamat()+" untuk donor darah");
         }
+
+        @OnClick(R.id.row_jadwal_bookmark)
+        public void addBookmark(){
+            jadwalDonorListener.addBookmark("Acara Donor Darah di"+list.get(getAdapterPosition()).getInstansi(),list.get(getAdapterPosition()).getAlamat(),"Acara Donor Darah");
+        }
     }
 
     public interface JadwalDonorListener {
         void share(String message);
+        void addBookmark(String tittle,String location,String description);
     }
 }

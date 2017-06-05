@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -66,7 +67,7 @@ public class StockDarahAdapter extends RecyclerView.Adapter<StockDarahAdapter.St
         @BindView(R.id.row_stok)
         TextView txtstock;
         @BindView(R.id.row_stock_share)
-        Button btnShare;
+        ImageView btnShare;
 
         public StockDarahViewHolder(View view) {
             super(view);

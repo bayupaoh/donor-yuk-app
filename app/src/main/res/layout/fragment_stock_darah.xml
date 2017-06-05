@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/activity_horizontal_margin">
 
 
@@ -16,14 +17,15 @@
             android:layout_height="match_parent" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/stock_fab"-->
-        <!--android:backgroundTint="@color/primary_dark"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:src="@drawable/ic_setting"-->
-        <!--android:tint="@color/icons" />-->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/stock_fab"
+        app:backgroundTint="@color/primary_dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/filter"
+        android:layout_margin="10dp"
+        android:tint="@color/icons" />
 </RelativeLayout>
