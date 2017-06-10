@@ -126,6 +126,7 @@ public class JadwalDonorFragment extends Fragment implements JadwalDonorContract
     @Override
     public void showEventData(List<ModelJadwalDonor.DataBean> scheduledModel) {
         adapter.replaceData(scheduledModel);
+        ((MainActivity) getActivity()).setupSubTitle(provinsi);
     }
 
     @Override
