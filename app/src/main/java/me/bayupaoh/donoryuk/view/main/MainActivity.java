@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.ic_place_event
     };
 
+    public MainActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setupTab() {
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    public void setupSubTitle(String tittle){
+        getSupportActionBar().setSubtitle(tittle);
     }
 
     private void setupToolbar() {

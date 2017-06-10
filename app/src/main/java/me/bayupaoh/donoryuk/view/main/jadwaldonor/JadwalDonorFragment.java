@@ -1,17 +1,28 @@
 package me.bayupaoh.donoryuk.view.main.jadwaldonor;
 
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,25 +32,30 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.bayupaoh.donoryuk.R;
 import me.bayupaoh.donoryuk.data.ModelJadwalDonor;
 import me.bayupaoh.donoryuk.util.StringUtils;
 import me.bayupaoh.donoryuk.util.ViewUtils;
+import me.bayupaoh.donoryuk.view.main.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class JadwalDonorFragment extends Fragment implements JadwalDonorContract.View,SwipeRefreshLayout.OnRefreshListener,JadwalDonorAdapter.JadwalDonorListener {
+public class JadwalDonorFragment extends Fragment implements JadwalDonorContract.View, SwipeRefreshLayout.OnRefreshListener, JadwalDonorAdapter.JadwalDonorListener {
 
 
     private JadwalDonorAdapter adapter;
     private JadwalDonorPresenter presenter;
-    private String date;
+    private String date = "";
+    private String provinsi = "Jawa Barat";
 
     @BindView(R.id.jadwal_recycler)
     RecyclerView recJadwal;
     @BindView(R.id.sr_jadwal)
     SwipeRefreshLayout srJadwal;
+
+    TextView txtWaktu;
 
     public JadwalDonorFragment() {
         // Required empty public constructor
@@ -50,13 +66,14 @@ public class JadwalDonorFragment extends Fragment implements JadwalDonorContract
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_jadwal_donor, container, false);;
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_jadwal_donor, container, false);
+        ;
         ButterKnife.bind(this, view);
         initPresenter();
         onAttachView();
         settingDate();
         setupRecyclerView();
-        loadData();
+        loadData(provinsi);
         setupSwipeRefresh();
         return view;
     }
@@ -64,8 +81,9 @@ public class JadwalDonorFragment extends Fragment implements JadwalDonorContract
     private void settingDate() {
         Calendar calendar = Calendar.getInstance();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        date= dateFormat.format(calendar.getTime());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        date = dateFormat.format(calendar.getTime());
+        Log.d("waktu", date);
     }
 
     private void setupRecyclerView() {
@@ -76,7 +94,7 @@ public class JadwalDonorFragment extends Fragment implements JadwalDonorContract
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        adapter = new JadwalDonorAdapter(getContext(), new ArrayList<ModelJadwalDonor.DataBean>(),this);
+        adapter = new JadwalDonorAdapter(getContext(), new ArrayList<ModelJadwalDonor.DataBean>(), this);
         recJadwal.setAdapter(adapter);
     }
 
@@ -131,13 +149,13 @@ public class JadwalDonorFragment extends Fragment implements JadwalDonorContract
         presenter = new JadwalDonorPresenter();
     }
 
-    private void loadData() {
-        presenter.loadDataEvent(date, "Jawa Barat");
+    private void loadData(String provinsi) {
+        presenter.loadDataEvent(date, provinsi);
     }
 
     @Override
     public void onRefresh() {
-        loadData();
+        loadData(provinsi);
     }
 
     private void setupSwipeRefresh() {
@@ -170,5 +188,51 @@ public class JadwalDonorFragment extends Fragment implements JadwalDonorContract
                 calDate.getTimeInMillis());
 
         startActivity(calIntent);
+    }
+
+    @OnClick(R.id.jadwal_fab)
+    public void filter() {
+        showDialogFilter(getView());
+    }
+
+    private void showDialogFilter(View view) {
+        final Dialog dialog = new Dialog(view.getContext());
+        dialog.setContentView(R.layout.fragment_jadwal_donor_alert_filter);
+        dialog.setTitle("Filter Jadwal Donor");
+        final Spinner spinnerProvinsi = (Spinner) dialog.findViewById(R.id.filter_spn_prov);
+        txtWaktu = (TextView) dialog.findViewById(R.id.filter_txt_waktu);
+        Button btnFilter = (Button) dialog.findViewById(R.id.filter_btn_jadwal);
+
+        txtWaktu.setText(date);
+
+        btnFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                provinsi = spinnerProvinsi.getSelectedItem().toString();
+                loadData(provinsi);
+                dialog.dismiss();
+            }
+        });
+
+        txtWaktu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showTimeDialog();
+            }
+        });
+        dialog.show();
+    }
+
+    private void showTimeDialog() {
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),DatePickerDialog.THEME_DEVICE_DEFAULT_DARK, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                date = StringUtils.convertCalendarToString(i,i1,i2);
+                txtWaktu.setText(date);
+            }
+        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+
+        datePickerDialog.show();
     }
 }

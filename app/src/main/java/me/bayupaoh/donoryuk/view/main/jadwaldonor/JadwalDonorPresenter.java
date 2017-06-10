@@ -56,7 +56,11 @@ public class JadwalDonorPresenter implements JadwalDonorContract.Presenter {
                     @Override
                     public void onNext(ModelJadwalDonor modelJadwalDonor) {
                         Log.i("result",new Gson().toJson(modelJadwalDonor));
-                        jadwalDonorView.showEventData(modelJadwalDonor.getData());
+                        if(modelJadwalDonor.getData() == null) {
+                            jadwalDonorView.showErrorMessage("Data Tidak Tersedia");
+                        }else{
+                            jadwalDonorView.showEventData(modelJadwalDonor.getData());
+                        }
                     }
                 });
 

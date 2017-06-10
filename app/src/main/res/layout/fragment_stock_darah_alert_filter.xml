@@ -38,7 +38,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Produvinsi"
+        android:text="Provinsi"
         android:textColor="@color/primary_text"
         android:textSize="15dp"
         android:textStyle="bold"/>
@@ -47,7 +47,8 @@
         android:id="@+id/filter_spn_proc"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:entries="@array/provinsi"/>
 
 
     <Button

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="10dp"
     android:padding="10dp"
     android:background="@color/icons"
@@ -19,6 +20,7 @@
         android:id="@+id/filter_spn_prov"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:entries="@array/provinsi"
         android:layout_marginTop="10dp"/>
 
     <TextView
@@ -31,6 +33,7 @@
         android:textStyle="bold"/>
 
     <TextView
+        android:id="@+id/filter_txt_waktu"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:text="Tanggal Acara"

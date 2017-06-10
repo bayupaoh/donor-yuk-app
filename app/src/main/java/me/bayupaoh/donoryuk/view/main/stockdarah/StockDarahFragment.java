@@ -1,6 +1,7 @@
 package me.bayupaoh.donoryuk.view.main.stockdarah;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,12 +12,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.bayupaoh.donoryuk.R;
 import me.bayupaoh.donoryuk.data.ModelJadwalDonor;
 import me.bayupaoh.donoryuk.data.ModelStokDarah;
@@ -138,5 +143,17 @@ public class StockDarahFragment extends Fragment implements StockDarahContract.V
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, message);
         startActivity(Intent.createChooser(shareIntent, "Bagikan ke sosial media"));
+    }
+
+    @OnClick(R.id.stock_fab)
+    public void filterHasil(){
+        showDialogFilter(getView());
+    }
+
+    private void showDialogFilter(View view) {
+        final Dialog dialog = new Dialog(view.getContext());
+        dialog.setContentView(R.layout.fragment_stock_darah_alert_filter);
+        dialog.setTitle("Filter Stock Darah");
+        dialog.show();
     }
 }
