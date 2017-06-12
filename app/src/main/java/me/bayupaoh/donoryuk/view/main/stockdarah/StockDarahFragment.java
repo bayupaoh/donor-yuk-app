@@ -12,9 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +23,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.bayupaoh.donoryuk.R;
-import me.bayupaoh.donoryuk.data.ModelJadwalDonor;
-import me.bayupaoh.donoryuk.data.ModelStokDarah;
+import me.bayupaoh.donoryuk.data.ContentDao;
+import me.bayupaoh.donoryuk.data.StokDarahDao;
 import me.bayupaoh.donoryuk.util.ViewUtils;
-import me.bayupaoh.donoryuk.view.main.jadwaldonor.JadwalDonorAdapter;
-import me.bayupaoh.donoryuk.view.main.jadwaldonor.JadwalDonorPresenter;
+import me.bayupaoh.donoryuk.view.main.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,10 +35,16 @@ public class StockDarahFragment extends Fragment implements StockDarahContract.V
     private StockDarahAdapter adapter;
     private StockDarahPresenter presenter;
 
+    private ArrayList<ContentDao> listGol = new ArrayList<>();
+
     @BindView(R.id.stok_recycler)
     RecyclerView recJadwal;
     @BindView(R.id.sr_stok)
     SwipeRefreshLayout srJadwal;
+
+    String prov = "Jawa Barat";
+    String prod = "AHF";
+    String gol = "a_pos";
 
 
     public StockDarahFragment() {
@@ -56,9 +61,21 @@ public class StockDarahFragment extends Fragment implements StockDarahContract.V
         initPresenter();
         onAttachView();
         setupRecyclerView();
-        loadData();
+        loadData(gol,prod,prov);
         setupSwipeRefresh();
+        setupProdAndGol();
         return view;
+    }
+
+    private void setupProdAndGol() {
+        listGol.add(new ContentDao("a_pos","A+"));
+        listGol.add(new ContentDao("b_pos","B+"));
+        listGol.add(new ContentDao("o_pos","O+"));
+        listGol.add(new ContentDao("ab_pos","AB+"));
+        listGol.add(new ContentDao("a_neg","A-"));
+        listGol.add(new ContentDao("b_neg","B-"));
+        listGol.add(new ContentDao("o_neg","O-"));
+        listGol.add(new ContentDao("ab_neg","AB-"));
     }
 
     private void setupSwipeRefresh() {
@@ -66,8 +83,8 @@ public class StockDarahFragment extends Fragment implements StockDarahContract.V
         srJadwal.setOnRefreshListener(this);
     }
 
-    private void loadData() {
-        presenter.loadDataStok("a_pos","AHF","Jawa Barat");
+    private void loadData(String gol,String prod, String prov) {
+        presenter.loadDataStok(gol,prod,prov);
     }
 
     private void setupRecyclerView() {
@@ -78,7 +95,7 @@ public class StockDarahFragment extends Fragment implements StockDarahContract.V
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        adapter = new StockDarahAdapter(getContext(), new ArrayList<ModelStokDarah.DataBean>(),this);
+        adapter = new StockDarahAdapter(getContext(), new ArrayList<StokDarahDao.DataBean>(),this);
         recJadwal.setAdapter(adapter);
     }
 
@@ -88,7 +105,7 @@ public class StockDarahFragment extends Fragment implements StockDarahContract.V
 
     @Override
     public void onRefresh() {
-        loadData();
+        loadData(gol,prod,prov);
     }
 
     @Override
@@ -117,8 +134,9 @@ public class StockDarahFragment extends Fragment implements StockDarahContract.V
     }
 
     @Override
-    public void showEventData(List<ModelStokDarah.DataBean> stokDarahModel) {
+    public void showEventData(List<StokDarahDao.DataBean> stokDarahModel) {
         adapter.replaceData(stokDarahModel);
+        ((MainActivity)getActivity()).setupSubTitle(prov);
     }
 
     @Override
@@ -154,6 +172,30 @@ public class StockDarahFragment extends Fragment implements StockDarahContract.V
         final Dialog dialog = new Dialog(view.getContext());
         dialog.setContentView(R.layout.fragment_stock_darah_alert_filter);
         dialog.setTitle("Filter Stock Darah");
+
+        final Spinner spnProd = (Spinner) dialog.findViewById(R.id.filter_spn_prod);
+        final Spinner spnProv = (Spinner) dialog.findViewById(R.id.filter_spn_proc);
+        final Spinner spnGol = (Spinner) dialog.findViewById(R.id.filter_spn_gol);
+        Button btnFilter = (Button) dialog.findViewById(R.id.filter_btn_stock);
+
+        String[] golDarah = {"A+","B+","O+","AB+","A-","B-","O-","AB-"};
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, golDarah);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnGol.setAdapter(spinnerArrayAdapter);
+
+
+        btnFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                prov = spnProv.getSelectedItem().toString();
+                prod = spnProd.getSelectedItem().toString();
+                gol = listGol.get(spnGol.getSelectedItemPosition()).getValue();
+
+                loadData(gol,prod,prov);
+                dialog.dismiss();
+            }
+        });
+
         dialog.show();
     }
 }

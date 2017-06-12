@@ -4,7 +4,7 @@ import java.util.List;
 
 import me.bayupaoh.donoryuk.BasePresenter;
 import me.bayupaoh.donoryuk.BaseView;
-import me.bayupaoh.donoryuk.data.ModelJadwalDonor;
+import me.bayupaoh.donoryuk.data.JadwalDonorDao;
 
 /**
  * Created by codelabsunikom on 6/2/17.
@@ -18,7 +18,7 @@ public class JadwalDonorContract {
 
         void showErrorMessage(String message);
 
-        void showEventData(List<ModelJadwalDonor.DataBean> scheduledModel);
+        void showEventData(List<JadwalDonorDao.DataBean> scheduledModel);
     }
 
     interface Presenter extends BasePresenter<View> {

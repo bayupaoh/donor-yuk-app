@@ -6,7 +6,7 @@ import java.util.List;
  * Created by codelabsunikom on 6/2/17.
  */
 
-public class ModelJadwalDonor {
+public class JadwalDonorDao {
 
     /**
      * status : success

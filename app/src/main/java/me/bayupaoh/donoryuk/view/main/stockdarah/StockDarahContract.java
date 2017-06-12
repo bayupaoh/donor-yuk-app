@@ -4,9 +4,7 @@ import java.util.List;
 
 import me.bayupaoh.donoryuk.BasePresenter;
 import me.bayupaoh.donoryuk.BaseView;
-import me.bayupaoh.donoryuk.data.ModelJadwalDonor;
-import me.bayupaoh.donoryuk.data.ModelStokDarah;
-import me.bayupaoh.donoryuk.view.main.jadwaldonor.JadwalDonorContract;
+import me.bayupaoh.donoryuk.data.StokDarahDao;
 
 /**
  * Created by codelabsunikom on 6/3/17.
@@ -20,7 +18,7 @@ public class StockDarahContract {
 
         void showErrorMessage(String message);
 
-        void showEventData(List<ModelStokDarah.DataBean> stokDarahModel);
+        void showEventData(List<StokDarahDao.DataBean> stokDarahModel);
     }
 
     interface Presenter extends BasePresenter<StockDarahContract.View> {

@@ -4,11 +4,9 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
-import me.bayupaoh.donoryuk.data.ModelJadwalDonor;
-import me.bayupaoh.donoryuk.data.ModelStokDarah;
+import me.bayupaoh.donoryuk.data.StokDarahDao;
 import me.bayupaoh.donoryuk.data.source.remote.ApiService;
 import me.bayupaoh.donoryuk.util.AppConstant;
-import me.bayupaoh.donoryuk.view.main.jadwaldonor.JadwalDonorContract;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -28,10 +26,10 @@ public class StockDarahPresenter implements StockDarahContract.Presenter {
     public void loadDataStok(String gol,String produk, String provinsi) {
         stokDarahView.showProgress();
         subscription.clear();
-        Observable<ModelStokDarah> call = ApiService.factory.create().getStokDarah(AppConstant.APIKey.KEY_SERVICES,gol,produk,provinsi);
+        Observable<StokDarahDao> call = ApiService.factory.create().getStokDarah(AppConstant.APIKey.KEY_SERVICES,gol,produk,provinsi);
         Subscription s = call.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ModelStokDarah>() {
+                .subscribe(new Subscriber<StokDarahDao>() {
                     @Override
                     public void onCompleted() {
                         stokDarahView.hideProgress();
@@ -44,7 +42,7 @@ public class StockDarahPresenter implements StockDarahContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(ModelStokDarah modelStokDarah) {
+                    public void onNext(StokDarahDao modelStokDarah) {
                         Log.i("result",new Gson().toJson(modelStokDarah));
                         stokDarahView.showEventData(modelStokDarah.getData());
                     }

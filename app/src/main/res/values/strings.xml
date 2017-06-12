@@ -43,70 +43,27 @@
     </string-array>
 
     <string-array name="product">
-        <item>
-        AHF
-        </item>
-        <item>
-        BC</item>
-        <item>
-        FFP
-        </item>
-        <item>
-        FP
-        </item>
-        <item>
-        Lekosit Aferesis
-        </item>
-        <item>
-        Leucodepleted
-        </item>
-        <item>
-        Leucodepletet
-        </item>
-        <item>
-        Leucoreduced
-        </item>
-        <item>
-        LP
-        </item>
-        <item>
-        LP Aferesis
-        </item>
-        <item>
-        PCL
-        </item>
-        <item>
-        PCLs
-        </item>
-        <item>
-        PRC
-        </item>
-        <item>
-        PRC Aferesis
-        </item>
-        <item>
-        TC
-        </item>
-        <item>
-        TC Aferesis
-        </item>
-        <item>
-        TC Apheresi
-        </item>
-        <item>
-        TC APR
-        </item>
-        <item>
-        TCP
-        </item>
-        <item>
-        WB
-        </item>
-        <item>
-        WB FRESH
-        </item>
-        <item>
-        WE
-        </item>
+        <item>AHF</item>
+        <item>BC</item>
+        <item>FFP</item>
+        <item>FP</item>
+        <item>Lekosit Aferesis</item>
+        <item>Leucodepleted</item>
+        <item>Leucodepletet</item>
+        <item>Leucoreduced</item>
+        <item>LP</item>
+        <item>LP Aferesis</item>
+        <item>PCL</item>
+        <item>PCLs</item>
+        <item>PRC</item>
+        <item>PRC Aferesis</item>
+        <item>TC</item>
+        <item>TC Aferesis</item>
+        <item>TC Apheresi</item>
+        <item>TC APR</item>
+        <item>TCP</item>
+        <item>WB</item>
+        <item>WB FRESH</item>
+        <item>WE</item>
     </string-array>
 </resources>

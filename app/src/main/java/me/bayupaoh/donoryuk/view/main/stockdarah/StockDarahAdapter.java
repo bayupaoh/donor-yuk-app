@@ -1,12 +1,10 @@
 package me.bayupaoh.donoryuk.view.main.stockdarah;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,9 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.bayupaoh.donoryuk.R;
-import me.bayupaoh.donoryuk.data.ModelJadwalDonor;
-import me.bayupaoh.donoryuk.data.ModelStokDarah;
-import me.bayupaoh.donoryuk.view.main.jadwaldonor.JadwalDonorAdapter;
+import me.bayupaoh.donoryuk.data.StokDarahDao;
 
 /**
  * Created by codelabsunikom on 6/3/17.
@@ -26,10 +22,10 @@ import me.bayupaoh.donoryuk.view.main.jadwaldonor.JadwalDonorAdapter;
 
 public class StockDarahAdapter extends RecyclerView.Adapter<StockDarahAdapter.StockDarahViewHolder> {
     private Context context;
-    private List<ModelStokDarah.DataBean> list;
+    private List<StokDarahDao.DataBean> list;
     private StockDarahAdapter.StokDarahListener stokDarahListener;
 
-    public StockDarahAdapter(Context context, List<ModelStokDarah.DataBean> list, StokDarahListener stokDarahListener) {
+    public StockDarahAdapter(Context context, List<StokDarahDao.DataBean> list, StokDarahListener stokDarahListener) {
         this.context = context;
         this.list = list;
         this.stokDarahListener = stokDarahListener;
@@ -53,7 +49,7 @@ public class StockDarahAdapter extends RecyclerView.Adapter<StockDarahAdapter.St
         return list.size();
     }
 
-    public void replaceData(List<ModelStokDarah.DataBean> listStokDarah) {
+    public void replaceData(List<StokDarahDao.DataBean> listStokDarah) {
         this.list = listStokDarah;
         notifyDataSetChanged();
     }

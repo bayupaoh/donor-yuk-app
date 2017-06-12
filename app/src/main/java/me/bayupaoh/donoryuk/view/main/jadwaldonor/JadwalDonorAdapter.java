@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.bayupaoh.donoryuk.R;
-import me.bayupaoh.donoryuk.data.ModelJadwalDonor;
+import me.bayupaoh.donoryuk.data.JadwalDonorDao;
 
 /**
  * Created by codelabsunikom on 6/2/17.
@@ -24,11 +23,11 @@ import me.bayupaoh.donoryuk.data.ModelJadwalDonor;
 public class JadwalDonorAdapter extends RecyclerView.Adapter<JadwalDonorAdapter.JadwalDonorViewHolder> {
 
     private Context context;
-    private List<ModelJadwalDonor.DataBean> list;
+    private List<JadwalDonorDao.DataBean> list;
     private JadwalDonorAdapter.JadwalDonorListener jadwalDonorListener;
     private String date;
 
-    public JadwalDonorAdapter(Context context, List<ModelJadwalDonor.DataBean> list, JadwalDonorListener jadwalDonorListener) {
+    public JadwalDonorAdapter(Context context, List<JadwalDonorDao.DataBean> list, JadwalDonorListener jadwalDonorListener) {
         this.context = context;
         this.list = list;
         this.jadwalDonorListener = jadwalDonorListener;
@@ -48,7 +47,7 @@ public class JadwalDonorAdapter extends RecyclerView.Adapter<JadwalDonorAdapter.
         holder.txtWaktu.setText(list.get(position).getJam());
     }
 
-    public void replaceData(List<ModelJadwalDonor.DataBean> listJadwalDonor) {
+    public void replaceData(List<JadwalDonorDao.DataBean> listJadwalDonor) {
         this.list = listJadwalDonor;
         notifyDataSetChanged();
     }

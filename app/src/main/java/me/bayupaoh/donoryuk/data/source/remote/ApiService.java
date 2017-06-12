@@ -2,9 +2,9 @@ package me.bayupaoh.donoryuk.data.source.remote;
 
 import java.util.concurrent.TimeUnit;
 
-import me.bayupaoh.donoryuk.data.ModelJadwalDonor;
-import me.bayupaoh.donoryuk.data.ModelListContent;
-import me.bayupaoh.donoryuk.data.ModelStokDarah;
+import me.bayupaoh.donoryuk.data.JadwalDonorDao;
+import me.bayupaoh.donoryuk.data.ListContentDao;
+import me.bayupaoh.donoryuk.data.StokDarahDao;
 import me.bayupaoh.donoryuk.util.AppConstant;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -22,13 +22,13 @@ public interface ApiService {
     String BASE_URL = AppConstant.APIUrl.BASE_API;
 
     @GET("exec")
-    Observable<ModelJadwalDonor> getJadwalDonor(@Query("service") String service, @Query("tanggal") String tanggal, @Query("provinsi") String provinsi);
+    Observable<JadwalDonorDao> getJadwalDonor(@Query("service") String service, @Query("tanggal") String tanggal, @Query("provinsi") String provinsi);
 
     @GET("exec")
-    Observable<ModelListContent> getListContent();
+    Observable<ListContentDao> getListContent();
 
     @GET("exec")
-    Observable<ModelStokDarah> getStokDarah(@Query("service") String service, @Query("gol") String gol, @Query("produk") String produk, @Query("provinsi") String provinsi);
+    Observable<StokDarahDao> getStokDarah(@Query("service") String service, @Query("gol") String gol, @Query("produk") String produk, @Query("provinsi") String provinsi);
 
     class factory {
         public static ApiService create() {

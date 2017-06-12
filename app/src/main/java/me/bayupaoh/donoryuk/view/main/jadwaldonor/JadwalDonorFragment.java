@@ -3,17 +3,14 @@ package me.bayupaoh.donoryuk.view.main.jadwaldonor;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +19,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.bayupaoh.donoryuk.R;
-import me.bayupaoh.donoryuk.data.ModelJadwalDonor;
+import me.bayupaoh.donoryuk.data.JadwalDonorDao;
 import me.bayupaoh.donoryuk.util.StringUtils;
 import me.bayupaoh.donoryuk.util.ViewUtils;
 import me.bayupaoh.donoryuk.view.main.MainActivity;
@@ -94,7 +90,7 @@ public class JadwalDonorFragment extends Fragment implements JadwalDonorContract
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        adapter = new JadwalDonorAdapter(getContext(), new ArrayList<ModelJadwalDonor.DataBean>(), this);
+        adapter = new JadwalDonorAdapter(getContext(), new ArrayList<JadwalDonorDao.DataBean>(), this);
         recJadwal.setAdapter(adapter);
     }
 
@@ -124,7 +120,7 @@ public class JadwalDonorFragment extends Fragment implements JadwalDonorContract
     }
 
     @Override
-    public void showEventData(List<ModelJadwalDonor.DataBean> scheduledModel) {
+    public void showEventData(List<JadwalDonorDao.DataBean> scheduledModel) {
         adapter.replaceData(scheduledModel);
         ((MainActivity) getActivity()).setupSubTitle(provinsi);
     }
